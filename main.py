@@ -4,6 +4,7 @@ from flask import Flask, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from sqlalchemy import create_engine
+from pandastodb import JsonSelect
 import os
 
 
@@ -104,8 +105,9 @@ def storedb():
 
 @app.route('/query')
 def query_db():
-    covid = Data.query.all()
-    return print(covid)
+    covid = JsonSelect()
+    json_s = covid.json_format
+    return print(json_s)
 
 
 @app.route('/pruebas')
